@@ -7,8 +7,10 @@ from dateutil.relativedelta import relativedelta
 
 def all_events(request):
     event_list = Events.objects.all()
+    next_month = list(calendar.month_name)[datetime.now().month+1]
     return render(request, 'events/all_events.html', {
         'event_list': event_list,
+        'next_month': next_month,
     })
 
 
