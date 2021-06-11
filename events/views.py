@@ -1,3 +1,4 @@
+from django.forms import ModelForm
 from django.shortcuts import render
 import calendar
 from datetime import datetime, timedelta
@@ -7,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 
 def all_events(request):
     event_list = Events.objects.all()
-    next_month = list(calendar.month_name)[datetime.now().month+1]
+    next_month = list(calendar.month_name)[datetime.now().month + 1]
     return render(request, 'events/all_events.html', {
         'event_list': event_list,
         'next_month': next_month,
@@ -21,7 +22,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     cal = calendar.HTMLCalendar().formatmonth(year, month_n)
     current_time = datetime.now().strftime('%I:%M:%p')
     current_year = datetime.now().year
-    next_month = list(calendar.month_name)[datetime.now().month+1]
+    next_month = list(calendar.month_name)[datetime.now().month + 1]
 
     return render(request, 'events/home.html', {
         'name': name,
@@ -32,3 +33,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
         'current_year': current_year,
         'next_month': next_month,
     })
+
+
+def add_venue(request):
+    return render(request, 'events/add_venue.html', {})
