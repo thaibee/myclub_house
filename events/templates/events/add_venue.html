@@ -2,10 +2,20 @@
 {% block content %}
     <div class="container">
 
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
+        {% if submitted == False %}
+            <form method="post" class="col-6">
+                {% csrf_token %}
+                <h1 class="py-3">Add Venue</h1>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Add venue</button>
+            </form>
+        {% else %}
+            <div class="alert alert-success" role="alert">
+                Your venue is saved!
+            </div>
+        {% endif %}
 
-        <h1>Add Venue</h1>
-
-        </div>
+    </div>
 
 {% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'events/base.html' %}
+{% block content %}
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <h1>Venues...</h1>
+            <div class="list-group list-group-item-action" aria-current="true">
+                {% for i in list_venues %}
+                    <a href="{{ i.id }}" class="list-group-item list-group-item-action">
+                        {{ i }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+{% endblock content %}

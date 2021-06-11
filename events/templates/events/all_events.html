@@ -12,11 +12,11 @@
                     <li>Time: {{ event.event_time }}</li>
                     <li>Coordinator: {{ event.manager }}</li>
                     <li>Attendees persons:
-                        <ul>
+                        <ol>
                             {% for person in event.attendees.all %}
                                 <li>{{ person }}</li>
                             {% endfor %}
-                        </ul>
+                        </ol>
                     </li>
                 </ul>
             </div>
