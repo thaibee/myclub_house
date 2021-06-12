@@ -24,7 +24,7 @@ class Venue(models.Model):
         return self.name
 
 
-class Events(models.Model):
+class Event(models.Model):
     name = models.CharField(max_length=30)
     event_date = models.DateField()
     event_time = models.TimeField()

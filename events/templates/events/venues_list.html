@@ -1,15 +1,20 @@
 {% extends 'events/base.html' %}
 {% block content %}
 
-    <div class="row">
-        <h1>Venues...</h1>
-        <div class="list-group col-5">
-            {% for i in list_venues %}
-                <a href=" {% url 'venue_details' i.id %}" class="list-group-item list-group-item-action">
-                    {{ i }}
-                </a>
-            {% endfor %}
-        </div>
+    <a href="{% url 'venue_add' %}" class="btn btn-secondary btn-sm p-2">Create new Venue</a>
+
+    <h2 class="pt-3">Venues...</h2>
+
+    <div class="list-group d-inline-flex">
+        {% for i in list_venues %}
+            <div class="list-group-item list-group-item-action">
+                <a class="text-decoration-none text-dark align-middle pe-5" href=" {% url 'venue_details' i.id %}"> {{ i }} </a>
+                <section class="float-end">
+                    <a href="{% url 'venue_upd' i.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+                    <a href="{% url 'venue_del' i.id %}" class="btn btn-outline-secondary btn-sm">Delete</a>
+                </section>
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock content %}

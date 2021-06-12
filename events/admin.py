@@ -6,7 +6,7 @@ from .models import *
 admin.site.register(ClubUsers)
 
 
-@admin.register(Events)
+@admin.register(Event)
 class EventsAdmin(ModelAdmin):
     list_display = ['name', 'event_date', 'venue']
     list_filter = ('name', 'venue')

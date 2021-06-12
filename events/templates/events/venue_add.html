@@ -1,0 +1,20 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
+        <div class="row">
+            {% if submitted == False %}
+                <form method="post" class="col-6">
+                    {% csrf_token %}
+                    <h2 class="pt-3">Add Venue</h2>
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary">Add venue</button>
+                </form>
+            {% else %}
+                <div class="alert alert-success" role="alert">
+                    Your venue is saved!
+                </div>
+            {% endif %}
+
+        </div>
+
+{% endblock content %}

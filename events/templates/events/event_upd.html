@@ -1,0 +1,11 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
+    <form method="post" class="col-md-6">
+        {% csrf_token %}
+        <h1 class="py-3">Update Venue</h1>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-secondary">Update</button>
+    </form>
+
+{% endblock content %}
