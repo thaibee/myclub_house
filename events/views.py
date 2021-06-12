@@ -1,8 +1,9 @@
 import calendar
 from datetime import datetime
 from django.shortcuts import render
-from .models import Events,  Venue
+from .models import Events, Venue
 from .forms import VenueForm
+
 
 def all_events(request):
     event_list = Events.objects.all()
@@ -53,7 +54,16 @@ def add_venue(request):
 def list_venues(request):
     next_month = list(calendar.month_name)[datetime.now().month + 1]
     list_venues = Venue.objects.all
-    return render(request, 'events/list_venues.html', {
+    return render(request, 'events/venues_list.html', {
         'next_month': next_month,
         'list_venues': list_venues,
+    })
+
+
+def venue_details(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    next_month = list(calendar.month_name)[datetime.now().month + 1]
+    return render(request, 'events/venue_details.html', {
+        'venue': venue,
+        'next_month': next_month,
     })

@@ -1,0 +1,19 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    <h1 class="py-2">Venue</h1>
+{#    {% for event in event_list %}#}
+        <div class="card col-lg-5">
+            <h5 class="card-header">{{ venue.name }}</h5>
+            <div class="card-body">
+                <ul>
+                    <li>Address: {{ venue.address }}</li>
+                    <li>Zip code: {{ venue.zip_code }}</li>
+                    <li>Phone number: {{ venue.phone_number }}</li>
+                    <li>Web address: <a href="{{ venue.web_address }}">{{ venue.web_address }}</a></li>
+                    <li>E-mail: <a href="mailto:{{ venue.email_address }}">{{ venue.email_address }}</a></li>
+                </ul>
+            </div>
+        </div>
+
+{% endblock %}

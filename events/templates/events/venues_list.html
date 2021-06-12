@@ -1,0 +1,15 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
+    <div class="row">
+        <h1>Venues...</h1>
+        <div class="list-group col-5">
+            {% for i in list_venues %}
+                <a href=" {% url 'venue_details' i.id %}" class="list-group-item list-group-item-action">
+                    {{ i }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
