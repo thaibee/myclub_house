@@ -1,6 +1,13 @@
 import calendar
+import io
 from datetime import datetime
+
+from django.http import FileResponse
 from django.shortcuts import render, redirect, HttpResponse
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
+
 from .models import Event, Venue
 from .forms import VenueForm, EventForm
 import csv
@@ -28,7 +35,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
 
 def venues_list(request):
     next_month = list(calendar.month_name)[datetime.now().month + 1]
-    list_venues = Venue.objects.all
+    list_venues = Venue.objects.all().order_by('?')
     return render(request, 'events/venues_list.html', {
         'next_month': next_month,
         'list_venues': list_venues,
@@ -143,3 +150,30 @@ def events_save_csv(request):
     for i in events:
         writer.writerow([i.name, i.venue, i.event_date, i.event_time])
     return response
+
+
+def events_save_pdf(request):
+    buffer = io.BytesIO()
+    paper = canvas.Canvas(buffer, pagesize=A4, bottomup=0)
+    text_obj = paper.beginText()
+    text_obj.setTextOrigin(cm, cm)
+    text_obj.setFont("Helvetica", 14)
+    text_lines = []
+    events = Event.objects.all()
+    for event in events:
+        text_lines.append('Event name: '+event.name)
+        text_lines.append(event.event_date.strftime('%d/%m/%y'))
+        text_lines.append(event.event_time.strftime('%H:%M'))
+        text_lines.append(event.venue.name)
+        text_lines.append('Response person: '+event.manager.username)
+        text_lines.append('====================')
+
+    for text in text_lines:
+        text_obj.textLine(text)
+
+    paper.drawText(text_obj)
+    paper.showPage()
+    paper.save()
+
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')

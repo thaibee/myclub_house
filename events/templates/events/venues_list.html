@@ -8,7 +8,8 @@
     <div class="list-group d-inline-flex">
         {% for i in list_venues %}
             <div class="list-group-item list-group-item-action">
-                <a class="text-decoration-none text-dark align-middle pe-5" href=" {% url 'venue_details' i.id %}"> {{ i }} </a>
+                <a class="text-decoration-none text-dark align-middle pe-5"
+                   href=" {% url 'venue_details' i.id %}"> {{ i }} </a>
                 <section class="float-end">
                     <a href="{% url 'venue_upd' i.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
                     <a href="{% url 'venue_del' i.id %}" class="btn btn-outline-secondary btn-sm">Delete</a>
